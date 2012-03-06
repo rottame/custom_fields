@@ -1,4 +1,9 @@
 en:
+  errors:
+    messages:
+      too_few_entries:
+        one: too few entries (please select at least %{count} entry)
+        other: too few entries (please select at least %{count} entries)
   custom_fields:
     type:
       string: Simple Input

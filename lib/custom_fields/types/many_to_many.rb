@@ -39,7 +39,12 @@ module CustomFields
             klass.has_and_belongs_to_many rule['name'], :class_name => rule['class_name'], :inverse_of => rule['inverse_of']
 
             if rule['required']
-              klass.validates_length_of rule['name'], :minimum => 1
+              #klass.validates_length_of rule['name'], :minimum => 1
+              klass.class_eval %(
+                validate do | record |
+		  errors.add(:#{rule['name']}, :too_few_entries, {:count => 1 }) if record.send(:#{rule['name']}).length < 1
+		end
+	      )
             end
           end
 
